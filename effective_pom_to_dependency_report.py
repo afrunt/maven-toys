@@ -12,23 +12,42 @@ class Project:
         pass
 
 
+class Dependency:
+    def __init__(self):
+        pass
+
+
 def pom_ns_tag_name(tag):
     return "{%s}%s" % (XML_NS_POM, tag)
 
 
-def child_tag_text_or_none(parent, tag):
+def child_tag_to_text(parent, tag):
+    return child_tag_to(parent, tag, lambda e: e.text, None)
+
+
+def child_tag_to(parent, tag, func, default):
     element = parent.find(pom_ns_tag_name(tag))
-    return element.text if element is not None else None
+    return func(element) if element is not None else default
+
+
+def xml_element_to_dependency(element):
+    dependency = Dependency()
+    dependency.group_id = child_tag_to_text(element, "groupId")
+    dependency.artifact_id = child_tag_to_text(element, "artifactId")
+    dependency.version = child_tag_to_text(element, "version")
+    dependency.scope = child_tag_to_text(element, "scope")
+    return dependency
 
 
 def xml_element_to_project(element):
     project = Project()
-    for e in element:
-        print(e)
-    project.group_id = child_tag_text_or_none(element, "groupId")
-    project.artifact_id = child_tag_text_or_none(element, "artifactId")
-    project.version = child_tag_text_or_none(element, "version")
-    project.packaging = child_tag_text_or_none(element, "packaging")
+    project.group_id = child_tag_to_text(element, "groupId")
+    project.artifact_id = child_tag_to_text(element, "artifactId")
+    project.version = child_tag_to_text(element, "version")
+    project.packaging = child_tag_to_text(element, "packaging")
+
+    project.dependencies = child_tag_to(element, "dependencies", lambda deps: [xml_element_to_dependency(d) for d in deps], [])
+
     return project
 
 
