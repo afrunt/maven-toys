@@ -6,4 +6,8 @@ RUN echo "Building..." \
     && yum install -y python3 python-pip \
     && pip3 install jsonpickle
 
+WORKDIR /
+
+ADD effective_pom_to_dependency_report.py /
+
 
