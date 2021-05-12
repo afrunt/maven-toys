@@ -78,3 +78,7 @@ def create_dependency_report(file_path):
 
 def create_dependency_report_json(file_path):
     return jsonpickle.encode(create_dependency_report(file_path), indent=True)
+
+
+if __name__ == '__main__':
+    pass
