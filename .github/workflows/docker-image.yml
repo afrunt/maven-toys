@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: afrunt/maven-toys:latest,afrunt/maven-toys:21.1
+          tags: afrunt/maven-toys:latest
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
