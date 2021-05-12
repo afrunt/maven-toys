@@ -31,7 +31,7 @@ class DependencyReportTest(unittest.TestCase):
 
     def test_create_dependency_report_json(self):
         json = ef.create_dependency_report_json(SAMPLE_EFFECTIVE_POM_XML)
-        print(json)
+        # print(json)
         self.assertIsNotNone(json)
 
 
