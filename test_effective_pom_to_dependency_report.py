@@ -1,13 +1,14 @@
 import unittest
 
-import effective_pom_to_dependency_report as ef
+import mt.ef
+from mt.ef import DependencyReport
 
 SAMPLE_EFFECTIVE_POM_XML = "sample-data/effective-pom.xml"
 
 
 class DependencyReportTest(unittest.TestCase):
     def test_parse_effective_pom_xml(self):
-        projects = ef.parse_effective_pom_xml(SAMPLE_EFFECTIVE_POM_XML)
+        projects = mt.ef.parse_effective_pom_xml(SAMPLE_EFFECTIVE_POM_XML)
         self.assertIsNotNone(projects)
         self.assertEqual(len(projects), 3)
         self.assertEqual(projects[0].packaging, "pom")
@@ -30,9 +31,16 @@ class DependencyReportTest(unittest.TestCase):
         self.assertEqual(projects[2].dependencies[0].scope, "compile")
 
     def test_create_dependency_report_json(self):
-        json = ef.create_dependency_report_json(SAMPLE_EFFECTIVE_POM_XML)
+        json = mt.ef.create_dependency_report_json(SAMPLE_EFFECTIVE_POM_XML)
         # print(json)
         self.assertIsNotNone(json)
+
+    def test_decode_dependency_report_json(self):
+        json = mt.ef.create_dependency_report_json(SAMPLE_EFFECTIVE_POM_XML)
+        report = mt.ef.decode_dependency_report_json_string(json)
+        self.assertIsNotNone(report)
+        self.assertTrue(isinstance(report, DependencyReport))
+        self.assertEqual(len(report.projects), 3)
 
 
 if __name__ == '__main__':
