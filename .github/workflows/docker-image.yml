@@ -28,6 +28,7 @@ jobs:
         run: |
           python test_effective_pom_to_dependency_report.py
           python test_dependency_to_update_report.py
+          
   docker:
     runs-on: ubuntu-latest
     steps:
