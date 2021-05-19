@@ -37,7 +37,7 @@ class DependencyReport:
         self.projects = []
         pass
 
-    def get_unique_dependencies(self) -> list[Dependency]:
+    def get_unique_dependencies(self):
         all_dependencies = [dependency for project in self.projects for dependency in project.dependencies]
         unique_dependencies = list(set(all_dependencies))
         unique_dependencies.sort()
