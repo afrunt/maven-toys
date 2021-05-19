@@ -106,13 +106,9 @@ def latest_version_of_dependency(group_id, artifact_id):
 
 
 def create_update_report_from_dependency_report(dependency_report):
-    all_dependencies = [dependency for project in dependency_report.projects for dependency in project.dependencies]
-    unique_dependencies = list(set(all_dependencies))
-    unique_dependencies.sort()
-
     dependencies_with_latest_versions = [
         (dependency, latest_version_of_dependency(dependency.group_id, dependency.artifact_id)) for
-        dependency in unique_dependencies
+        dependency in dependency_report.get_unique_dependencies()
     ]
 
     report = UpdateReport()

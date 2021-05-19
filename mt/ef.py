@@ -4,12 +4,6 @@ import jsonpickle
 
 EXIT_CODE_OK, EXIT_CODE_ERROR = 0, 1
 
-
-class DependencyReport:
-    def __init__(self):
-        pass
-
-
 XML_NS_POM = "http://maven.apache.org/POM/4.0.0"
 
 
@@ -36,6 +30,18 @@ class Dependency:
 
     def __lt__(self, other):
         return str(self) < str(other)
+
+
+class DependencyReport:
+    def __init__(self):
+        self.projects = []
+        pass
+
+    def get_unique_dependencies(self) -> list[Dependency]:
+        all_dependencies = [dependency for project in self.projects for dependency in project.dependencies]
+        unique_dependencies = list(set(all_dependencies))
+        unique_dependencies.sort()
+        return unique_dependencies
 
 
 def pom_ns_tag_name(tag):

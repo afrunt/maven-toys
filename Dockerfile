@@ -11,6 +11,7 @@ WORKDIR /
 ADD mt /mt/
 ADD effective_pom_to_dependency_report.py /
 ADD dependency_to_update_report.py /
+ADD dependency_diff_report.py /
 
 
 

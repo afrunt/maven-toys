@@ -1,0 +1,52 @@
+{
+  "py/object": "mt.ef.DependencyReport",
+  "projects": [
+    {
+      "py/object": "mt.ef.Project",
+      "group_id": "org.example",
+      "artifact_id": "sample-project",
+      "version": "1.0-SNAPSHOT",
+      "packaging": "pom",
+      "dependencies": []
+    },
+    {
+      "py/object": "mt.ef.Project",
+      "group_id": "org.example",
+      "artifact_id": "module-a",
+      "version": "1.0-SNAPSHOT",
+      "packaging": null,
+      "dependencies": [
+        {
+          "py/object": "mt.ef.Dependency",
+          "group_id": "org.xhtmlrenderer",
+          "artifact_id": "flying-saucer-pdf",
+          "version": "9.1.20",
+          "scope": "compile"
+        }
+      ]
+    },
+    {
+      "py/object": "mt.ef.Project",
+      "group_id": "org.example",
+      "artifact_id": "module-b",
+      "version": "1.0-SNAPSHOT",
+      "packaging": null,
+      "dependencies": [
+        {
+          "py/object": "mt.ef.Dependency",
+          "group_id": "org.xhtmlrenderer",
+          "artifact_id": "flying-saucer-pdf",
+          "version": "9.1.22",
+          "scope": "compile"
+        },
+        {
+          "py/object": "mt.ef.Dependency",
+          "group_id": "com.h2database",
+          "artifact_id": "h2",
+          "version": "1.4.190",
+          "scope": "test"
+        }
+      ]
+    }
+  ]
+}
